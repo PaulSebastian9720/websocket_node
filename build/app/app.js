@@ -59,7 +59,12 @@ class ServerBootstrap {
                             userName: sender.userName,
                             chatId: chat.id,
                         });
-                        const history = yield this.messageService.getMessagesByChat(chat.id);
+                        const history = (yield this.messageService.getMessagesByChat(chat.id)).map((m) => ({
+                            id: m.id,
+                            content: m.content,
+                            createdAt: m.createdAt,
+                            senderName: m.sender.userName,
+                        }));
                         ws.send(JSON.stringify({
                             type: "history",
                             messages: history,

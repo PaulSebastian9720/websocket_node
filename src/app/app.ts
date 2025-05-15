@@ -52,9 +52,14 @@ export class ServerBootstrap {
               chatId: chat.id,
             });
 
-            const history = await this.messageService.getMessagesByChat(
-              chat.id
-            );
+            const history = (
+              await this.messageService.getMessagesByChat(chat.id)
+            ).map((m) => ({
+              id: m.id,
+              content: m.content,
+              createdAt: m.createdAt,
+              senderName: m.sender.userName,
+            }));
 
             ws.send(
               JSON.stringify({
