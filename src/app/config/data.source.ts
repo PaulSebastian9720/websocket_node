@@ -3,6 +3,8 @@ import { DataSource } from "typeorm";
 import { Message } from "../entities/message";
 import { User } from "../entities/user";
 import { Chat } from "../entities/chat";
+import { Group } from "../entities/groupChat";
+import { GroupMessage } from "../entities/groupMessages";
 
 export const AppDataSource = new DataSource({
   type: "postgres",
@@ -13,7 +15,7 @@ export const AppDataSource = new DataSource({
   database: "db_chats",
   synchronize: true,
   logging: false,
-  entities: [Message, User, Chat],
+  entities: [Message, User, Chat, Group, GroupMessage],
   migrations: [],
   subscribers: [],
 });
